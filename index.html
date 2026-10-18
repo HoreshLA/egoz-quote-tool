@@ -684,7 +684,7 @@
 
     <div class="card">
       <h2><span class="dot"></span>עלות הקמה והתקנה</h2>
-      <p class="card-note">תשלום חד-פעמי (לא חודשי). הזינו סכום ידנית והוא יופיע בהצעה בנפרד מהסכום החודשי. השאירו ריק אם אין עלות הקמה.</p>
+      <p class="card-note">תשלום חד פעמי (לא חודשי). הזינו סכום ידנית והוא יופיע בהצעה בנפרד מהסכום החודשי. השאירו ריק אם אין עלות הקמה.</p>
       <div class="field-grid">
         <div class="field">
           <label>סכום עלות הקמה והתקנה <span class="unit-price">₪ · לפני מע״מ</span></label>
@@ -798,7 +798,7 @@
 
     <div class="card">
       <h2><span class="dot"></span>עלות הקמה והתקנה</h2>
-      <p class="card-note">תשלום חד-פעמי (לא חודשי). הזינו סכום ידנית והוא יופיע בהצעה בנפרד מהסכום החודשי. השאירו ריק אם אין עלות הקמה.</p>
+      <p class="card-note">תשלום חד פעמי (לא חודשי). הזינו סכום ידנית והוא יופיע בהצעה בנפרד מהסכום החודשי. השאירו ריק אם אין עלות הקמה.</p>
       <div class="field-grid">
         <div class="field">
           <label>סכום עלות הקמה והתקנה <span class="unit-price">₪ · לפני מע״מ</span></label>
@@ -17232,7 +17232,7 @@ pako/dist/pako.es5.min.js:
     const setupVat = vatOn ? setupCost * 0.18 : 0;
     const setupTotal = setupCost + setupVat;
     el('setupRowTop').innerHTML = setupCost > 0
-      ? `<div class="totals-row" style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);"><span>עלות הקמה והתקנה (חד-פעמי)${vatOn ? ' · כולל מע״מ' : ''}</span><span class="val nums">${fmt(setupTotal)}</span></div>`
+      ? `<div class="totals-row" style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);"><span>עלות הקמה והתקנה (חד פעמי)${vatOn ? ' · כולל מע״מ' : ''}</span><span class="val nums">${fmt(setupTotal)}</span></div>`
       : '';
 
     renderItems(items);
@@ -17405,7 +17405,7 @@ pako/dist/pako.es5.min.js:
     el('pqVatNote').style.display = state.vatOn ? 'none' : '';
 
     el('pqSetupRows').innerHTML = state.setupCost > 0
-      ? `<div class="pq-total-row" style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);"><span>עלות הקמה והתקנה (חד-פעמי)${state.vatOn ? ' · כולל מע״מ' : ''}</span><span class="nums">${fmt(state.setupTotal)}</span></div>`
+      ? `<div class="pq-total-row" style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);"><span>עלות הקמה והתקנה (חד פעמי)${state.vatOn ? ' · כולל מע״מ' : ''}</span><span class="nums">${fmt(state.setupTotal)}</span></div>`
       + (state.vatOn ? '' : '<div class="pq-vat-note">המחיר אינו כולל מע״מ</div>')
       : '';
   }
@@ -17437,7 +17437,7 @@ pako/dist/pako.es5.min.js:
     if (!state.vatOn) lines.push('המחיר אינו כולל מע״מ');
     if (state.setupCost > 0){
       lines.push('');
-      lines.push('עלות הקמה והתקנה (חד-פעמי): ' + fmt(state.setupTotal) + (state.vatOn ? ' (כולל מע״מ)' : ' (לא כולל מע״מ)'));
+      lines.push('עלות הקמה והתקנה (חד פעמי): ' + fmt(state.setupTotal) + (state.vatOn ? ' (כולל מע״מ)' : ' (לא כולל מע״מ)'));
     }
     return lines.join('\n');
   }
@@ -17774,7 +17774,7 @@ pako/dist/pako.es5.min.js:
       grandTotal: fmt(state.grand),
       vatOff: !state.vatOn,
       hasSetup: state.setupCost > 0,
-      setupLabel: 'עלות הקמה והתקנה (חד-פעמי)' + (state.vatOn ? ' · כולל מע"מ' : ''),
+      setupLabel: 'עלות הקמה והתקנה (חד פעמי)\u200f' + (state.vatOn ? ' · כולל מע"מ\u200f' : ''),
       setupAmount: state.setupCost > 0 ? fmt(state.setupTotal) : ''
     };
 
@@ -17925,7 +17925,7 @@ pako/dist/pako.es5.min.js:
     {id:'g3', title:'אחסון ענן',                 note:'נפח אחסון ענן בשימוש, מחיר לכל GB.'}
   ];
   const optLabel = (it, v) => v === 0 ? 'לא נדרש' : (v === 1 && it.one) ? it.one : v + ' ' + it.noun;
-  const qtyText  = (it, q) => it.id === 'stor' ? 'עד ' + q + ' ' + it.noun : (q === 1 && it.one) ? it.one : q + ' ' + it.noun;
+  const qtyText  = (it, q) => it.id === 'stor' ? 'עד ' + q + '\u200e ' + it.noun : (q === 1 && it.one) ? it.one : q + ' ' + it.noun;
   const priceTxt = it => '₪' + (it.price % 1 === 0 ? it.price : it.price.toFixed(2)) + ' / ' + it.unit;
 
   $('acCards').innerHTML = GROUPS.map(g => `
@@ -17984,7 +17984,7 @@ pako/dist/pako.es5.min.js:
     const grand = afterAll + vat;
     const setupCost = Math.max(0, parseFloat($('acSetupCost').value) || 0);
     const setupTotal = setupCost * (vatOn ? 1.18 : 1);
-    const setupLbl = 'עלות הקמה והתקנה (חד-פעמי)' + (vatOn ? ' · כולל מע״מ' : '');
+    const setupLbl = 'עלות הקמה והתקנה (חד פעמי)' + (vatOn ? ' · כולל מע״מ' : '');
     $('acSetupRowTop').innerHTML = setupCost > 0
       ? `<div class="totals-row" style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);"><span>${setupLbl}</span><span class="val nums">${fmt(setupTotal)}</span></div>` : '';
     const cName = $('acClientName').value.trim();
@@ -18130,7 +18130,7 @@ pako/dist/pako.es5.min.js:
     if (s.vatOn) L.push('מע״מ (18%): ' + fmt(s.vat));
     L.push('סה״כ לתשלום לחודש: ' + fmt(s.grand));
     if (!s.vatOn) L.push('המחיר אינו כולל מע״מ');
-    if (s.setupCost > 0){ L.push(''); L.push('עלות הקמה והתקנה (חד-פעמי): ' + fmt(s.setupTotal) + (s.vatOn ? ' (כולל מע״מ)' : ' (לא כולל מע״מ)')); }
+    if (s.setupCost > 0){ L.push(''); L.push('עלות הקמה והתקנה (חד פעמי): ' + fmt(s.setupTotal) + (s.vatOn ? ' (כולל מע״מ)' : ' (לא כולל מע״מ)')); }
     const text = L.join('\n');
     try { await navigator.clipboard.writeText(text); }
     catch(e){ const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }
@@ -18159,7 +18159,7 @@ pako/dist/pako.es5.min.js:
       grandTotal: fmt(s.grand),
       vatOff: !s.vatOn,
       hasSetup: s.setupCost > 0,
-      setupLabel: 'עלות הקמה והתקנה (חד-פעמי)' + (s.vatOn ? ' · כולל מע"מ' : ''),
+      setupLabel: 'עלות הקמה והתקנה (חד פעמי)\u200f' + (s.vatOn ? ' · כולל מע"מ\u200f' : ''),
       setupAmount: s.setupCost > 0 ? fmt(s.setupTotal) : ''
     });
     return tpl.getZip().generate({ type:'blob', mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
