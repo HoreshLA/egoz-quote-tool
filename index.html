@@ -17925,7 +17925,7 @@ pako/dist/pako.es5.min.js:
     {id:'g3', title:'אחסון ענן',                 note:'נפח אחסון ענן בשימוש, מחיר לכל GB.'}
   ];
   const optLabel = (it, v) => v === 0 ? 'לא נדרש' : (v === 1 && it.one) ? it.one : v + ' ' + it.noun;
-  const qtyText  = (it, q) => it.id === 'stor' ? 'עד ' + q + '\u200e ' + it.noun : (q === 1 && it.one) ? it.one : q + ' ' + it.noun;
+  const qtyText  = (it, q) => it.id === 'stor' ? 'עד ' + q + ' ' + it.noun : (q === 1 && it.one) ? it.one : q + ' ' + it.noun;
   const priceTxt = it => '₪' + (it.price % 1 === 0 ? it.price : it.price.toFixed(2)) + ' / ' + it.unit;
 
   $('acCards').innerHTML = GROUPS.map(g => `
@@ -18147,7 +18147,7 @@ pako/dist/pako.es5.min.js:
       clientName: s.cName || 'לקוח',
       hasContact: !!s.contact,
       contact: s.contact || '',
-      items: s.items.map(i => ({ label: i.label, qtyLabel: i.qtyLabel })),
+      items: s.items.map(i => ({ label: i.label, qtyLabel: i.id === 'stor' ? '\u202b' + i.qtyLabel + '\u202c' : i.qtyLabel })),
       subtotal: fmt(s.raw),
       hasLineDiscount: s.lineDisc > 0,
       lineDiscountValue: s.lineDisc > 0 ? '-' + fmt(s.lineDisc) : '',
