@@ -66,6 +66,15 @@
     white-space:nowrap;
   }
 
+  .mode-bar{max-width:1180px; margin:0 auto; padding:clamp(18px,3vw,30px) clamp(18px,3vw,36px) 0; display:flex; justify-content:flex-start;}
+  .mode-btn{
+    font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:12px;
+    background:var(--grad); color:#fff; border:0; border-radius:14px;
+    padding:11px 20px; font-size:15px; font-weight:800;
+    box-shadow:0 8px 22px rgba(53,72,181,.30);
+  }
+  .mode-btn:hover{filter:brightness(1.07);}
+  .mode-btn-hint{font-size:11.5px; font-weight:600; opacity:.8; padding-left:12px; border-left:1px solid rgba(255,255,255,.4);}
   .header-tab-wrap{position:relative; z-index:1;}
   button.header-tag{font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:8px;}
   button.header-tag:hover{background:rgba(255,255,255,.14);}
@@ -529,13 +538,6 @@
     </div>
   </div>
   <div class="header-left-group no-print">
-    <div class="header-tab-wrap">
-      <button type="button" class="header-tag" id="modeBtn"><span id="modeBtnLabel">Hosting · אחסון שרתים</span><span>▾</span></button>
-      <div class="header-tab-menu" id="modeMenu" style="display:none;">
-        <button type="button" data-mode="host">מחשבון הצעת מחיר – אחסון שרתים</button>
-        <button type="button" data-mode="ac">מחשבון מחירים Acronis</button>
-      </div>
-    </div>
     <button type="button" class="header-sp-connect" id="spConnectBtn">התחבר ל-Microsoft</button>
     <div class="header-sp-settings-wrap">
       <button type="button" class="header-sp-gear" id="spSettingsGearBtn" title="הגדרות חיבור ל-SharePoint">⚙</button>
@@ -566,6 +568,14 @@
     </div>
   </div>
 </header>
+
+<div class="mode-bar no-print">
+  <button type="button" class="mode-btn" id="modeBtn"><span class="mode-btn-hint">החלפת מחשבון</span><span id="modeBtnLabel">מחשבון אחסון שרתים</span><span class="mode-btn-caret">▾</span></button>
+  <div class="header-tab-menu" id="modeMenu" style="display:none;">
+    <button type="button" data-mode="host">מחשבון הצעת מחיר – אחסון שרתים</button>
+    <button type="button" data-mode="ac">מחשבון מחירים Acronis</button>
+  </div>
+</div>
 
 <div class="wrap" id="hostWrap">
 
@@ -17901,21 +17911,21 @@ pako/dist/pako.es5.min.js:
   // ---------- Acronis price list (SKU, per-unit monthly price) ----------
   const NUMS = [0,1,2,3,4,5,10,15,20,25,30,40,50,75,100,150,200,300,500];
   const ITEMS = [
-    {id:'srv',  group:'g1', label:'שרתים מוגנים (Servers)',                    sku:'SPEAMSENS', price:150,   unit:'שרת',        opts:[0,1,2,3,4,5,6,8,10,15,20,30,50], noun:'שרתים', one:'שרת אחד'},
+    {id:'srv',  group:'g1', label:'שרת פיזי',                    sku:'SPEAMSENS', price:150,   unit:'שרת',        opts:[0,1,2,3,4,5,6,8,10,15,20,30,50], noun:'שרתים פיזיים', one:'שרת פיזי אחד'},
     {id:'vm',   group:'g1', label:'מכונות וירטואליות מוגנות (VMs)',             sku:'SPFAMSENS', price:50,    unit:'VM',         opts:[0,1,2,3,4,5,6,8,10,15,20,30,50,75,100], noun:'VM', one:'VM אחד'},
     {id:'ws',   group:'g1', label:'תחנות עבודה מוגנות (Workstations)',          sku:'SPGAMSENS', price:30,    unit:'תחנה',       opts:NUMS, noun:'תחנות עבודה', one:'תחנת עבודה אחת'},
     {id:'edr',  group:'g1', label:'Endpoints עם הגנת EDR',                      sku:'SRIAMSENS', price:8.75,  unit:'Endpoint',   opts:NUMS, noun:'Endpoints', one:'Endpoint אחד'},
     {id:'m365', group:'g2', label:'מושבי Microsoft 365 מוגנים',                 sku:'SRJAMSENS', price:10.56, unit:'מושב',       opts:NUMS.concat([]), noun:'מושבים', one:'מושב אחד'},
     {id:'mail', group:'g2', label:'Email & Collaboration Security – תיבות דואר', sku:'SO4AMSENS', price:9.92,  unit:'תיבה',       opts:NUMS, noun:'תיבות דואר', one:'תיבת דואר אחת'},
-    {id:'stor', group:'g3', label:'Cloud Storage (Class 2) – נפח בשימוש',       sku:'SPDAMSENS', price:0.30,  unit:'GB',         opts:Array.from({length:21},(_,i)=>i*500), noun:'GB', one:null}
+    {id:'stor', group:'g3', label:'Cloud Storage – נפח בשימוש',       sku:'SPDAMSENS', price:0.30,  unit:'GB',         opts:Array.from({length:21},(_,i)=>i*500), noun:'GB', one:null}
   ];
   const GROUPS = [
     {id:'g1', title:'הגנה על שרתים ותחנות קצה', note:'מחיר חודשי לכל יחידה מוגנת.'},
     {id:'g2', title:'Microsoft 365 ודואר',       note:'מושבי Microsoft 365 ואבטחת דואר ושיתוף פעולה.'},
-    {id:'g3', title:'אחסון ענן',                 note:'נפח אחסון ענן (Class 2) בשימוש, מחיר לכל GB.'}
+    {id:'g3', title:'אחסון ענן',                 note:'נפח אחסון ענן בשימוש, מחיר לכל GB.'}
   ];
   const optLabel = (it, v) => v === 0 ? 'לא נדרש' : (v === 1 && it.one) ? it.one : v + ' ' + it.noun;
-  const qtyText  = (it, q) => (q === 1 && it.one) ? it.one : q + ' ' + it.noun;
+  const qtyText  = (it, q) => it.id === 'stor' ? 'עד ' + q + ' ' + it.noun : (q === 1 && it.one) ? it.one : q + ' ' + it.noun;
   const priceTxt = it => '₪' + (it.price % 1 === 0 ? it.price : it.price.toFixed(2)) + ' / ' + it.unit;
 
   $('acCards').innerHTML = GROUPS.map(g => `
@@ -18189,7 +18199,7 @@ pako/dist/pako.es5.min.js:
     host.style.display = isAc ? 'none' : '';
     ac.style.display = isAc ? '' : 'none';
     document.body.classList.toggle('mode-ac', isAc);
-    $('modeBtnLabel').textContent = isAc ? 'Acronis · מחשבון מחירים' : 'Hosting · אחסון שרתים';
+    $('modeBtnLabel').textContent = isAc ? 'מחשבון Acronis' : 'מחשבון אחסון שרתים';
     menu.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
     menu.style.display = 'none';
     try { history.replaceState(null, '', isAc ? '#acronis' : location.pathname + location.search); } catch(e){}
