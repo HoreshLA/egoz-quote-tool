@@ -623,7 +623,7 @@
           <select id="ssd"></select>
         </div>
         <div class="field">
-          <label>גיבוי מקומי <span class="unit-price">₪100 / 100GB</span></label>
+          <label>גיבוי מקומי <span class="unit-price">₪0.50 / GB</span></label>
           <select id="localBackup"></select>
           <small class="hint">מתומחר בבלוקים של עד 100GB</small>
         </div>
@@ -17128,7 +17128,7 @@ pako/dist/pako.es5.min.js:
     core: 10,
     ram: 5,
     ssd: 0.5,
-    backupBlock: 100,   // per 100GB block
+    backupGb: 0.5,      // per GB
     firewall: 20,       // per VM
     vpn: 20,            // per user
     rds: 40,            // per user
@@ -17195,14 +17195,13 @@ pako/dist/pako.es5.min.js:
 
     el('vmEcho').textContent = vmCount;
 
-    const backupBlocks = backupGb > 0 ? Math.ceil(backupGb / 100) : 0;
 
     const items = [];
 
     if (cores > 0) items.push({id:'cores', label:'ליבות מעבד (Core)', qtyLabel: cores + ' ליבות', unitPrice: PRICES.core, total: cores * PRICES.core});
     if (ram > 0) items.push({id:'ram', label:'זיכרון עבודה (RAM)', qtyLabel: ram + ' GB', unitPrice: PRICES.ram, total: ram * PRICES.ram});
     if (ssd > 0) items.push({id:'ssd', label:'שטח אחסון SSD', qtyLabel: ssd + ' GB', unitPrice: PRICES.ssd, total: ssd * PRICES.ssd});
-    if (backupBlocks > 0) items.push({id:'localBackup', label:'גיבוי מקומי', qtyLabel: backupBlocks + ' בלוק/ים (100GB)', unitPrice: PRICES.backupBlock, total: backupBlocks * PRICES.backupBlock});
+    if (backupGb > 0) items.push({id:'localBackup', label:'גיבוי מקומי', qtyLabel: backupGb + ' GB', unitPrice: PRICES.backupGb, total: backupGb * PRICES.backupGb});
 
     if (vmCount > 0) items.push({id:'vm', label:'שרתים וירטואליים (VM)', qtyLabel: String(vmCount), unitPrice: PRICES.vm, total: vmCount * PRICES.vm});
     if (el('firewall').checked && vmCount > 0) items.push({id:'firewall', label:'פיירוול (Firewall)', qtyLabel: String(vmCount), unitPrice: PRICES.firewall, total: vmCount * PRICES.firewall});
