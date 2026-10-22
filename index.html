@@ -635,7 +635,7 @@
       <p class="card-note">שירותים אלו מתומחרים לפי שרת וירטואלי (VM) — סכמו כמה שרתים כלולים בהצעה, וסמנו אילו שירותים חלים על כולם.</p>
       <div class="field-grid" style="grid-template-columns:1fr; margin-bottom:14px;">
         <div class="field">
-          <label>מספר שרתים וירטואליים (VM) בהצעה</label>
+          <label>מספר שרתים וירטואליים (VM) בהצעה <span class="unit-price">₪10 / VM</span></label>
           <select id="vmCount"></select>
         </div>
       </div>
@@ -17124,6 +17124,7 @@ pako/dist/pako.es5.min.js:
 </script>
 <script>
   const PRICES = {
+    vm:10,
     core: 10,
     ram: 5,
     ssd: 0.5,
@@ -17152,7 +17153,7 @@ pako/dist/pako.es5.min.js:
                    label:v => v===0 ? 'לא נדרש' : v + ' GB' },
     localBackup: { options:[0,100,200,300,500,1000,2000,5000], default:0,
                    label:v => v===0 ? 'לא נדרש' : v + ' GB' },
-    vmCount:     { options:[0,1,2,3,4,5,6,8,10,12,16,20,24,32], default:1,
+    vmCount:     { options:[0,1,2,3,4,5,6,7,8,9,10,11,12,16,20,24,32], default:0,
                    label:v => v===0 ? 'ללא שרתים' : v + ' VM' },
     vpn:         { options:[0,1,2,3,5,10,15,20,25,50,100], default:0,
                    label:v => v===0 ? 'לא נדרש' : v===1 ? 'משתמש אחד' : v + ' משתמשים' },
@@ -17203,9 +17204,10 @@ pako/dist/pako.es5.min.js:
     if (ssd > 0) items.push({id:'ssd', label:'שטח אחסון SSD', qtyLabel: ssd + ' GB', unitPrice: PRICES.ssd, total: ssd * PRICES.ssd});
     if (backupBlocks > 0) items.push({id:'localBackup', label:'גיבוי מקומי', qtyLabel: backupBlocks + ' בלוק/ים (100GB)', unitPrice: PRICES.backupBlock, total: backupBlocks * PRICES.backupBlock});
 
-    if (el('firewall').checked && vmCount > 0) items.push({id:'firewall', label:'פיירוול (Firewall)', qtyLabel: vmCount + ' VM', unitPrice: PRICES.firewall, total: vmCount * PRICES.firewall});
-    if (el('mgmt').checked && vmCount > 0) items.push({id:'mgmt', label:'שירות ניהול ותחזוקה', qtyLabel: vmCount + ' VM', unitPrice: PRICES.mgmt, total: vmCount * PRICES.mgmt});
-    if (el('acronis').checked && vmCount > 0) items.push({id:'acronis', label:'גיבוי ענן אקרוניס (Acronis)', qtyLabel: vmCount + ' VM', unitPrice: PRICES.acronis, total: vmCount * PRICES.acronis});
+    if (vmCount > 0) items.push({id:'vm', label:'שרתים וירטואליים (VM)', qtyLabel: String(vmCount), unitPrice: PRICES.vm, total: vmCount * PRICES.vm});
+    if (el('firewall').checked && vmCount > 0) items.push({id:'firewall', label:'פיירוול (Firewall)', qtyLabel: String(vmCount), unitPrice: PRICES.firewall, total: vmCount * PRICES.firewall});
+    if (el('mgmt').checked && vmCount > 0) items.push({id:'mgmt', label:'שירות ניהול ותחזוקה', qtyLabel: String(vmCount), unitPrice: PRICES.mgmt, total: vmCount * PRICES.mgmt});
+    if (el('acronis').checked && vmCount > 0) items.push({id:'acronis', label:'גיבוי ענן אקרוניס (Acronis)', qtyLabel: String(vmCount), unitPrice: PRICES.acronis, total: vmCount * PRICES.acronis});
 
     if (vpn > 0) items.push({id:'vpn', label:'חיבור VPN', qtyLabel: vpn + ' משתמשים', unitPrice: PRICES.vpn, total: vpn * PRICES.vpn});
     if (rds > 0) items.push({id:'rds', label:'רישיון RDS', qtyLabel: rds + ' משתמשים', unitPrice: PRICES.rds, total: rds * PRICES.rds});
