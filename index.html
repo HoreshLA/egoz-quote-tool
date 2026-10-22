@@ -238,6 +238,8 @@
     background-size:15px;
   }
   .field select:focus{outline:none;}
+  .field:has(select){cursor:pointer;}
+  .field:has(select) label{cursor:pointer;}
 
   .field input[type="text"]{
     width:100%; border:none; background:transparent;
@@ -18592,5 +18594,23 @@ pako/dist/pako.es5.min.js:
 </script>
 
 
+<script>
+/* לחיצה בכל מקום בתיבת מוצר פותחת את הרשימה הנגללת */
+document.addEventListener('click', function(e){
+  var t = e.target;
+  if (t.closest('select, input, textarea, button, a')) return;
+  var f = t.closest('.field');
+  if (!f) return;
+  var sels = Array.prototype.filter.call(f.querySelectorAll('select'), function(x){ return !x.disabled && x.offsetParent !== null; });
+  if (!sels.length) return;
+  var pick = sels[0], best = Infinity;
+  sels.forEach(function(x){
+    var r = x.getBoundingClientRect();
+    var d = e.clientX < r.left ? r.left - e.clientX : (e.clientX > r.right ? e.clientX - r.right : 0);
+    if (d < best) { best = d; pick = x; }
+  });
+  try { pick.focus(); if (pick.showPicker) pick.showPicker(); } catch(err) {}
+});
+</script>
 </body>
 </html>
